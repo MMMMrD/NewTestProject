@@ -11,7 +11,7 @@ public enum EventType   //如果需要添加什么事件 可以直接在这里�
 }
 
 //作为UnityEvent之间的参数
-public class EventData
+/*public class EventData
 {
     public enum EventDataSystem { one, two, three }
     float x, y, z;
@@ -44,23 +44,18 @@ public class EventData
 
         return -1;
     }
-}
-
-//public class SingleValueUnityEvent : UnityEvent<float>{}
-//public class DoubleValueUnityEvent : UnityEvent<float, float>{}
-//public class EventDataValueUnityEvent : UnityEvent<EventData>{}
-//public class JsonValueUnityEvent : UnityEvent<string> { }
+}*/
 
 public class EventManager : Singleton<EventManager>
 {
     public Dictionary<EventType, UnityEvent> dictionary = new Dictionary<EventType, UnityEvent>();
     public Dictionary<string, UnityEvent> strDictionary = new Dictionary<string, UnityEvent>();
-    public Dictionary<string, UnityEvent<float>> singleValueDic = new Dictionary<string, UnityEvent<float>>();
-    public Dictionary<string, UnityEvent<float, float>> doubleValueDic = new Dictionary<string, UnityEvent<float, float>>();
+/*    public Dictionary<string, UnityEvent<float>> singleValueDic = new Dictionary<string, UnityEvent<float>>();
+    public Dictionary<string, UnityEvent<float, float>> doubleValueDic = new Dictionary<string, UnityEvent<float, float>>();*/
 
     public Dictionary<string, UnityEvent<string>> jsonDic = new Dictionary<string, UnityEvent<string>>();
 
-    public Dictionary<string, UnityEvent<EventData>> eventDataDic = new Dictionary<string, UnityEvent<EventData>>();
+/*    public Dictionary<string, UnityEvent<EventData>> eventDataDic = new Dictionary<string, UnityEvent<EventData>>();*/
 
     protected override void Awake() //让scene切换的时候不要将该物体删除
     {
@@ -99,7 +94,7 @@ public class EventManager : Singleton<EventManager>
         }
     }
 
-    public void AddListener<T>(T eventType, UnityAction<float> unityAction) where T : Enum
+/*    public void AddListener<T>(T eventType, UnityAction<float> unityAction) where T : Enum
     {
         string eventName = eventType.GetType().Name + "_" + eventType.ToString();
         Debug.Log(eventName);
@@ -113,9 +108,9 @@ public class EventManager : Singleton<EventManager>
             currentEvent.AddListener(unityAction);
             singleValueDic.Add(eventName, currentEvent);
         }
-    }
+    }*/
 
-    public void AddListener<T>(T eventType, UnityAction<float, float> unityAction) where T : Enum
+/*    public void AddListener<T>(T eventType, UnityAction<float, float> unityAction) where T : Enum
     {
         string eventName = eventType.GetType().Name + "_" + eventType.ToString();
         Debug.Log(eventName);
@@ -129,7 +124,7 @@ public class EventManager : Singleton<EventManager>
             currentEvent.AddListener(unityAction);
             doubleValueDic.Add(eventName, currentEvent);
         }
-    }
+    }*/
 
     public void RemoveListener(EventType eventType, UnityAction unityAction)
     {
@@ -156,7 +151,7 @@ public class EventManager : Singleton<EventManager>
         }
     }
 
-    public void RemoveListener<T>(T eventType, UnityAction<float> unityAction) where T : Enum
+/*    public void RemoveListener<T>(T eventType, UnityAction<float> unityAction) where T : Enum
     {
         string eventName = eventType.GetType().Name + "_" + eventType.ToString();
         if(singleValueDic.ContainsKey(eventName))
@@ -167,7 +162,7 @@ public class EventManager : Singleton<EventManager>
         {
             throw new System.Exception("删除事件出现错误");
         }
-    }
+    }*/
 
     public void InvokeEvent(EventType eventType)   //执行所有事件
     {
@@ -194,10 +189,10 @@ public class EventManager : Singleton<EventManager>
         }
     }
 
-    public void InvokeEvent<T>(T eventType, float value) where T : Enum
+/*    public void InvokeEvent<T>(T eventType, float value) where T : Enum
     {
         string eventName = eventType.GetType().Name + "_" + eventType.ToString();
-        if(singleValueDic.ContainsKey(eventName))
+        if (singleValueDic.ContainsKey(eventName))
         {
             singleValueDic[eventName].Invoke(value);
         }
@@ -205,9 +200,9 @@ public class EventManager : Singleton<EventManager>
         {
             throw new System.Exception("调用事件出现错误");
         }
-    }
+    }*/
 
-    public void InvokeEvent<T>(T eventType, float first, float second) where T : Enum //执行所有事件
+/*    public void InvokeEvent<T>(T eventType, float first, float second) where T : Enum //执行所有事件
     {
         string eventName = eventType.GetType().Name + "_" + eventType.ToString();
         if(doubleValueDic.ContainsKey(eventName))
@@ -218,11 +213,11 @@ public class EventManager : Singleton<EventManager>
         {
             throw new System.Exception("调用事件出现错误");
         }
-    }
+    }*/
 
     #region 进行事件调用
 
-    public void AddListener<T>(T eventType, UnityAction<EventData> unityAction) where T : Enum
+    /*public void AddListener<T>(T eventType, UnityAction<EventData> unityAction) where T : Enum
     {
         string eventName = eventType.GetType().Name + "_" + eventType.ToString();
         Debug.Log(eventName);
@@ -260,7 +255,7 @@ public class EventManager : Singleton<EventManager>
             eventDataDic[eventName].Invoke(eventData);
         }
         else { throw new System.Exception("调用事件出现错误"); }
-    }
+    }*/
 
     public void AddListener<T>(T eventType, UnityAction<string> unityAction) where T : Enum
     {
